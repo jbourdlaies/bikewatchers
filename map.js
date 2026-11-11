@@ -81,9 +81,9 @@ function filterTripsbyTime(trips, timeFilter) {
 
 map.on('load', async () => {
   const bikeLanePaint = {
-    'line-color': '#32D400',
+    'line-color': '#3e8c26',
     'line-width': 5,
-    'line-opacity': 0.6,
+    'line-opacity': 0.5,
   };
 
   map.addSource('boston_route', {
@@ -135,8 +135,6 @@ map.on('load', async () => {
     trips
   );
 
-  console.log('Stations with traffic:', stations);
-
   const radiusScale = d3
     .scaleSqrt()
     .domain([
@@ -144,6 +142,11 @@ map.on('load', async () => {
       d3.max(stations, (d) => d.totalTraffic),
     ])
     .range([0, 25]);
+
+  const stationFlow = d3
+    .scaleQuantize()
+    .domain([0, 1])
+    .range([0, 0.5, 1]);
 
   const circles = svg
     .selectAll('circle')
@@ -155,6 +158,13 @@ map.on('load', async () => {
     .attr('stroke', 'white')
     .attr('stroke-width', 1)
     .attr('opacity', 0.8)
+    .style('--departure-ratio', (d) =>
+      stationFlow(
+        d.totalTraffic === 0
+          ? 0.5
+          : d.departures / d.totalTraffic
+      )
+    )
     .each(function (d) {
       d3.select(this)
         .append('title')
@@ -206,7 +216,14 @@ map.on('load', async () => {
         (d) => d.short_name
       )
       .join('circle')
-      .attr('r', (d) => radiusScale(d.totalTraffic));
+      .attr('r', (d) => radiusScale(d.totalTraffic))
+      .style('--departure-ratio', (d) =>
+        stationFlow(
+          d.totalTraffic === 0
+            ? 0.5
+            : d.departures / d.totalTraffic
+        )
+      );
   }
 
   function updateTimeDisplay() {
