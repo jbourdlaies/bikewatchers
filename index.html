@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Bikewatchers</title>
 
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="map.css">
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="global.css" />
 
-    <!-- Mapbox GL JS CSS -->
+    <link rel="stylesheet" href="map.css" />
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
     <link
         href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
         rel="stylesheet"
@@ -17,16 +19,14 @@
 
     <script src="map.js" type="module"></script>
 </head>
+
 <body>
 
     <h1>🚴🏼‍♀️ Bikewatchers</h1>
 
-    <p>
-        An interactive visualization exploring bicycle traffic
-        patterns and bike-sharing activity across Boston and Cambridge.
-    </p>
-
-    <div id="map"></div>
+    <div id="map">
+        <svg></svg>
+    </div>
 
 </body>
 </html>
