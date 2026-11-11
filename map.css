@@ -31,3 +31,27 @@ body {
   stroke-width: 1;
   pointer-events: auto;
 }
+
+header {
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+}
+
+.time-filter {
+  margin-left: auto;
+}
+
+.time-filter time,
+.time-filter em {
+  display: block;
+}
+
+.time-filter em {
+  color: gray;
+  font-style: italic;
+}
+
+#time-slider {
+  width: 200px;
+}
